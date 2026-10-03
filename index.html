@@ -99,7 +99,20 @@
   <section id="projects" class="section wrap">
     <h2>Projects</h2>
     <div class="cards two">
-      <article class="card project">
+      <article class="card project featured">
+        <div class="gallery">
+          <div class="tabs" role="tablist" aria-label="Dashboard pages">
+            <button class="active" data-src="images/powerbi-sales.png" data-cap="Sales: $13.59M total sales and a $120.65 average order, broken down by city, product category and month.">Sales</button>
+            <button data-src="images/powerbi-delivery.png" data-cap="Delivery: 91.9% of orders arrived on time, with an average delivery time of 12.09 days, broken down by city and month.">Delivery</button>
+            <button data-src="images/powerbi-payments.png" data-cap="Payments: 99.44K payments averaging 154.10. Credit card is by far the most used payment type.">Payments</button>
+            <button data-src="images/powerbi-reviews.png" data-cap="Reviews: 99.22K reviews with an average score of 4.09. Almost 58% of reviews give 5 stars.">Reviews</button>
+            <button data-src="images/powerbi-sellers.png" data-cap="Sellers: 3,095 sellers, mostly in São Paulo, mapped by state.">Sellers</button>
+          </div>
+          <button class="shot" id="shot-open" aria-label="Enlarge screenshot">
+            <img id="shot-img" src="images/powerbi-sales.png" alt="Power BI dashboard page" width="1688" height="962">
+          </button>
+          <p class="caption" id="shot-cap">Sales: $13.59M total sales and a $120.65 average order, broken down by city, product category and month.</p>
+        </div>
         <div class="card-head">
           <span class="tag bi">Power BI + SQL</span>
         </div>
@@ -175,6 +188,33 @@
 </main>
 
 <footer class="wrap footer">© <span id="yr"></span> Sukhman Singh Rai</footer>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<dialog id="lightbox" aria-label="Screenshot preview">
+  <img id="lightbox-img" alt="Power BI dashboard page, enlarged">
+  <button id="lightbox-close" aria-label="Close">×</button>
+</dialog>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Dashboard gallery: tabs swap the screenshot and caption; clicking the image enlarges it
+const img = document.getElementById('shot-img');
+const cap = document.getElementById('shot-cap');
+document.querySelectorAll('.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    img.src = btn.dataset.src;
+    img.alt = 'Power BI dashboard: ' + btn.textContent + ' page';
+    cap.textContent = btn.dataset.cap;
+  });
+});
+const box = document.getElementById('lightbox');
+document.getElementById('shot-open').addEventListener('click', () => {
+  document.getElementById('lightbox-img').src = img.src;
+  box.showModal();
+});
+document.getElementById('lightbox-close').addEventListener('click', () => box.close());
+box.addEventListener('click', e => { if (e.target === box) box.close(); });
+</script>
 </body>
 </html>

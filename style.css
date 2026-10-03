@@ -120,6 +120,37 @@ h3 { font-size: 1.15rem; line-height: 1.35; }
 
 .project .tools { font-family: "JetBrains Mono", monospace; font-size: 13px; margin-top: auto; padding-top: 6px; }
 .links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Featured project with dashboard gallery */
+.project.featured { grid-column: 1 / -1; }
+.gallery { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button {
+  font: 500 14px Inter, system-ui, sans-serif; cursor: pointer;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: transparent; color: var(--muted);
+}
+.tabs button:hover { color: var(--text); border-color: var(--accent); }
+.tabs button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+@media (prefers-color-scheme: dark) { .tabs button.active { color: #0f1218; } }
+.shot {
+  display: block; padding: 0; border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; background: #fff; cursor: zoom-in;
+}
+.shot img { display: block; width: 100%; height: auto; }
+.card p.caption { font-size: 14px; }
+
+dialog#lightbox {
+  border: none; padding: 0; background: transparent;
+  max-width: 96vw; max-height: 94vh; margin: auto;
+}
+dialog#lightbox::backdrop { background: rgba(10, 12, 18, .85); }
+#lightbox-img { display: block; max-width: 96vw; max-height: 94vh; border-radius: 8px; background: #fff; }
+#lightbox-close {
+  position: fixed; top: 16px; right: 20px; width: 40px; height: 40px;
+  border-radius: 50%; border: none; background: #fff; color: #14171f;
+  font-size: 24px; line-height: 1; cursor: pointer;
+}
 .more { margin-top: 22px; color: var(--muted); }
 
 /* Timeline */
